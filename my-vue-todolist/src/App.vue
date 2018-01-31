@@ -35,7 +35,8 @@ body {
 }
 
 .nav-bar {
-  background-color: #d74b3e;
+  /* background-color: #d74b3e; */
+  background-color: #da413d;
   font-size: 22px;
   color: #ffffff;
   padding: 15px 0;
@@ -44,7 +45,7 @@ body {
   font-size: 50px;
 }
 .nav-bar .slogan{
-  margin: 0;
+  margin: 10px 0 0 0 ;
 }
 .header {
   margin: 15px 0;
