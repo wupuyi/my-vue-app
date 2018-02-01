@@ -75,6 +75,7 @@ export default {
       for(let i = 0; i < this.list.length; i++) {
         let item = this.list[i];
         if(item.checked) {
+          // 修改到这里了!!!!
           total += item.price * item.count
         }
       }
@@ -99,13 +100,24 @@ export default {
       this.list.splice(index, 1)
     },
     handleCheck(index) {
+      if(this.checkedAll) {
+
+      }
       this.list[index].checked = !this.list[index].checked
     },
     handleCheckAll() {
-      for(let i = 0; i < this.list.length; i++) {
-        if (!this.list[i].checked) {
-          this.handleCheck(i)
+      if(!this.checkedAll) {
+        for(let i = 0; i < this.list.length; i++) {
+          if (!this.list[i].checked) {
+            this.handleCheck(i)
+          }
         }
+        this.checkedAll = true
+      } else {
+        this.list.forEach((ele) => {
+          ele.checked = !ele.checked
+        });
+        this.checkedAll = false
       }
     }
   }
