@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <div class="nav-bar">
-      <i class="iconfont icon-dui logo"></i>
-      <p class="slogan">我就是那个TodoList</p>
+      <!-- <i class="iconfont icon-dui logo"></i> -->
+      <!-- <p class="logo">(งᵒ̌皿ᵒ̌)ง⁼³₌₃</p> -->
+      <!-- <p class="logo">*٩(๑´ ∀ `๑)ง*</p> -->
+      <p class="logo">(￣ε(#￣)☆╰╮o(￣▽￣///)</p>
+      <p class="slogan">就是要，搞事情</p>
     </div>
     <div class="header">
       开黑了么就去敲代码
@@ -42,13 +45,15 @@ body {
   padding: 15px 0;
 }
 .nav-bar .logo {
-  font-size: 50px;
+  font-size: 30px;
+  margin: 0 0 20px 0;
 }
 .nav-bar .slogan{
   margin: 10px 0 0 0 ;
+  font-weight: bold;
 }
 .header {
-  margin: 15px 0;
+  margin: 20px 0;
   font-size: 20px;
 }
 </style>
