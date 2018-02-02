@@ -1,6 +1,6 @@
 # my-vue-test
 
-> my vue test
+主要用来存一些Vue的小组件等。
 
 ## Build Setup
 

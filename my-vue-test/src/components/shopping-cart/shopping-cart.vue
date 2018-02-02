@@ -1,6 +1,6 @@
 <template>
   <div class="shopping-cart">
-    <div v-if="list.length">
+    <div v-if="showAll">
       <table>
         <thead>
           <tr>
@@ -93,7 +93,8 @@ export default {
           }
         ]
       ],
-      checkedAll: false
+      checkedAll: false,
+      showAll: 0
     }
   },
   computed: {
@@ -120,6 +121,7 @@ export default {
     },
     handleRemove (indexs, index) {
       this.list[indexs].splice(index, 1)
+      this.isNull()
     },
     handleCheck (indexs, index) {
       if (this.checkedAll) {
@@ -146,7 +148,17 @@ export default {
         })
         this.checkedAll = false
       }
+    },
+    isNull () {
+      let len = 0
+      this.list.forEach((ele) => {
+        len += ele.length
+      })
+      this.showAll = len;
     }
+  },
+  mounted() {
+    this.isNull()
   }
 }
 </script>
