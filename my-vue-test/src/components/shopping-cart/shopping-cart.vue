@@ -5,6 +5,7 @@
         <thead>
           <tr>
             <th><input type="checkbox" @change="handleCheckAll" ref="checkAll">全选</th>
+            <th>类别</th>
             <th></th>
             <th>商品名称</th>
             <th>商品单价</th>
@@ -13,21 +14,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in list">
-            <td><input type="checkbox" name="goods" @change="handleCheck(index)" :checked="item.checked"></td>
-            <td>{{ index + 1 }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.price }}</td>
-            <td>
-              <button @click="handleReduce(index)"
-                      :disabled="item.count === 1">-</button>
-              {{ item.count }}
-              <button @click="handleAdd(index)">+</button>
-            </td>
-            <td>
-              <button @click="handleRemove(index)">移除</button>
-            </td>
-          </tr>
+          <template v-for="(category, indexs) in list">
+            <tr v-for="(item, index) in category">
+              <td><input type="checkbox" name="goods" @change="handleCheck(indexs, index)" :checked="item.checked"></td>
+              <td>{{ item.category }}</td>
+              <td>{{ index + 1 }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.price }}</td>
+              <td>
+                <button @click="handleReduce(indexs, index)"
+                        :disabled="item.count === 1">-</button>
+                {{ item.count }}
+                <button @click="handleAdd(indexs, index)">+</button>
+              </td>
+              <td>
+                <button @click="handleRemove(indexs, index)">移除</button>
+              </td>
+            </tr>
+          </template>
         </tbody>
       </table>
       <div>总价为：￥{{totalPrice}}</div>
@@ -44,27 +48,50 @@ export default {
   data () {
     return {
       list: [
-        {
-          id: 1,
-          name: 'iPhone 7',
-          price: 6188,
-          count: 1,
-          checked: false
-        },
-        {
-          id: 2,
-          name: 'iPad Pro',
-          price: 5888,
-          count: 1,
-          checked: false
-        },
-        {
-          id: 3,
-          name: 'MacBook Pro',
-          price: 21488,
-          count: 1,
-          checked: false
-        }
+        [
+          {
+            id: 1,
+            name: 'iPhone 7',
+            price: 6188,
+            count: 1,
+            checked: false,
+            category: '电子产品'
+          },
+          {
+            id: 2,
+            name: 'iPad Pro',
+            price: 5888,
+            count: 1,
+            checked: false,
+            category: '电子产品'
+          },
+          {
+            id: 3,
+            name: 'MacBook Pro',
+            price: 21488,
+            count: 1,
+            checked: false,
+            category: '电子产品'
+          }
+        ],
+        [
+          {
+            id: 4,
+            name: '土豆土豆',
+            price: 3,
+            count: 1,
+            checked: false,
+            category: '果蔬'
+          },
+          {
+            id: 5,
+            name: '榴莲榴莲',
+            price: 50,
+            count: 1,
+            checked: false,
+            category: '果蔬'
+          }
+        ]
       ],
       checkedAll: false
     }
@@ -73,42 +100,49 @@ export default {
     totalPrice () {
       let total = 0
       for (let i = 0; i < this.list.length; i++) {
-        let item = this.list[i]
-        if (item.checked) {
-          total += item.price * item.count
+        let category = this.list[i]
+        for (let j = 0; j < category.length; j++) {
+          let item = category[j]
+          if (item.checked) {
+            total += item.price * item.count
+          }
         }
       }
       return total.toString().replace(/\B(?=(\d{3})+$)/g, ',')
     }
   },
   methods: {
-    handleReduce (index) {
-      this.list[index].count--
+    handleReduce (indexs, index) {
+      this.list[indexs][index].count--
     },
-    handleAdd (index) {
-      this.list[index].count++
+    handleAdd (indexs, index) {
+      this.list[indexs][index].count++
     },
-    handleRemove (index) {
-      this.list.splice(index, 1)
+    handleRemove (indexs, index) {
+      this.list[indexs].splice(index, 1)
     },
-    handleCheck (index) {
+    handleCheck (indexs, index) {
       if (this.checkedAll) {
         this.$refs.checkAll.checked = false
         this.checkedAll = false
       }
-      this.list[index].checked = !this.list[index].checked
+      this.list[indexs][index].checked = !this.list[indexs][index].checked
     },
     handleCheckAll () {
       if (!this.checkedAll) {
         for (let i = 0; i < this.list.length; i++) {
-          if (!this.list[i].checked) {
-            this.handleCheck(i)
+          for (let j = 0; j < this.list[i].length; j++) {
+            if (!this.list[i][j].checked) {
+              this.handleCheck(i, j)
+            }
           }
         }
         this.checkedAll = true
       } else {
         this.list.forEach((ele) => {
-          ele.checked = !ele.checked
+          ele.forEach((e) => {
+            e.checked = !e.checked
+          })
         })
         this.checkedAll = false
       }
