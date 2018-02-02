@@ -5,6 +5,10 @@
         <img class="project-img" src="../common/image/logo@500x.png">
         <router-link  class="project-title" to="/shopping-cart" tag="div">购物车</router-link>
       </div>
+      <div class="item">
+        <img class="project-img" src="../common/image/logo@500x.png">
+        <router-link  class="project-title" to="/input-number" tag="div">计数器</router-link>
+      </div>
     </div>
   </div>
 </template>

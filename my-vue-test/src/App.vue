@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <div class="header">
-      <img class="logo" src="./assets/logo@100x.png">
-      <h1 class="title">我的作品集</h1>
-    </div>
+    <router-link to="/hello" tag="div">
+      <div class="header">
+        <img class="logo" src="./assets/logo@100x.png">
+        <h1 class="title">我的作品集</h1>
+      </div>
+    </router-link>
     <router-view/>
   </div>
 </template>
@@ -30,6 +32,9 @@ export default {
   padding: 10px 0;
   margin-bottom: 20px;
   box-shadow: 0 1px 6px #cccccc;
+}
+.header:hover {
+  cursor: pointer;
 }
 .header .logo {
   width: 50px;
