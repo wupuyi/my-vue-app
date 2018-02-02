@@ -4,7 +4,7 @@
       <table>
         <thead>
           <tr>
-            <th><input type="checkbox" @change="handleCheckAll" >全选</th>
+            <th><input type="checkbox" @change="handleCheckAll" ref="checkAll">全选</th>
             <th></th>
             <th>商品名称</th>
             <th>商品单价</th>
@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       list: [
         {
@@ -70,44 +70,37 @@ export default {
     }
   },
   computed: {
-    totalPrice() {
+    totalPrice () {
       let total = 0
-      for(let i = 0; i < this.list.length; i++) {
-        let item = this.list[i];
-        if(item.checked) {
-          // 修改到这里了!!!!
+      for (let i = 0; i < this.list.length; i++) {
+        let item = this.list[i]
+        if (item.checked) {
           total += item.price * item.count
         }
       }
       return total.toString().replace(/\B(?=(\d{3})+$)/g, ',')
-    },
-    // allChecked () {
-    //   this.list.forEach((ele) => {
-    //     if(ele.checked) {
-    //       return false
-    //     }
-    //   })
-    // }
+    }
   },
   methods: {
-    handleReduce(index) {
-      this.list[index].count--;
+    handleReduce (index) {
+      this.list[index].count--
     },
-    handleAdd(index) {
-      this.list[index].count++;
+    handleAdd (index) {
+      this.list[index].count++
     },
-    handleRemove(index) {
+    handleRemove (index) {
       this.list.splice(index, 1)
     },
-    handleCheck(index) {
-      if(this.checkedAll) {
-
+    handleCheck (index) {
+      if (this.checkedAll) {
+        this.$refs.checkAll.checked = false
+        this.checkedAll = false
       }
       this.list[index].checked = !this.list[index].checked
     },
-    handleCheckAll() {
-      if(!this.checkedAll) {
-        for(let i = 0; i < this.list.length; i++) {
+    handleCheckAll () {
+      if (!this.checkedAll) {
+        for (let i = 0; i < this.list.length; i++) {
           if (!this.list[i].checked) {
             this.handleCheck(i)
           }
@@ -116,7 +109,7 @@ export default {
       } else {
         this.list.forEach((ele) => {
           ele.checked = !ele.checked
-        });
+        })
         this.checkedAll = false
       }
     }
