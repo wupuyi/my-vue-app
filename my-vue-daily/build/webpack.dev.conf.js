@@ -9,9 +9,16 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const express = require('express')
+const app = express()
+
+const axios = require('axios')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
+
+const apiRoutes = express.Router()
+app.use('/api', apiRoutes)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -42,8 +49,19 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    before (app) {
+      app.get('/api/getApi', function (req, res) {
+        var url = 'http://news-at.zhihu.com/api/4/news/3892357'
+        axios.get(url).then((response) => {
+          res.json(response.data)
+        }).cath((e) => {
+          console.log(e)
+        })
+      })
     }
   },
+
   plugins: [
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')

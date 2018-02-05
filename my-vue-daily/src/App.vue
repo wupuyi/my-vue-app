@@ -1,13 +1,25 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <router-view/>
+    <button @click="getApiContent">111111</button>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+    getApi() {
+      axios.get('https://zhihu-daily.leanapp.cn/api/v1/last-stories').then((res) => {
+        console.log(res)
+        return Promise.resolve(res.data)
+      })
+    },
+    getApiContent() {
+      console.log(this.getApi())
+    }
+  }
 }
 </script>
 
