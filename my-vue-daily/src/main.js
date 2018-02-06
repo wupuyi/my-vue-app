@@ -3,6 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import apiConfig from '../config/api.config'
+
+import Axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, Axios)
+Axios.defaults.baseURL = apiConfig.baseUrl
 
 Vue.config.productionTip = false
 

@@ -1,23 +1,22 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <button @click="getApiContent">111111</button>
+    <img src="https://pic3.zhimg.com/30594279d368534c6c2f91b2c00c7806.jpg" ref="img">
+    <img src="http://localhost:8080/api/https://pic3.zhimg.com/30594279d368534c6c2f91b2c00c7806.jpg" alt="">
+    <button @click="getNews">111111</button>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'App',
   methods: {
-    getApi() {
-      axios.get('https://zhihu-daily.leanapp.cn/api/v1/last-stories').then((res) => {
-        console.log(res)
-        return Promise.resolve(res.data)
+    getNews () {
+      this.$http.get('3892357').then((result) => {
+        let res = result.data
+        this.nickName = ''
+        console.log(res.image)
+        this.$refs.img.src = res.image
       })
-    },
-    getApiContent() {
-      console.log(this.getApi())
     }
   }
 }
