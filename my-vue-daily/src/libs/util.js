@@ -23,7 +23,7 @@ Util.getTodayTime = function () {
   date.setMinutes(0)
   date.setSeconds(0)
   date.setMilliseconds(0)
-  return date.getTime
+  return date.getTime()
 }
 
 // 获取前一天的日期

@@ -16,20 +16,21 @@
     </div>
     <div class="daily-list">
       <template v-if="type === 'recommend'">
-        <div class="daily-date">{{ formatDay(list.date) }}</div>
-        <Item v-for="item in list.stories"
-              :data="item"
-              :key="item.id"></Item>
+        <div v-for="list in recommendList">
+          <div class="daily-date">{{ formatDay(list.date) }}</div>
+          <item v-for="item in list.stories"
+                :data="item"
+                :key="item.id"></item>
+        </div>
       </template>
       <template v-if="type === 'daily'">
         <item v-for="item in list"
               :data="item"
               :key="item.id">
-
         </item>
       </template>
     </div>
-    <daily-article></daily-article>
+    <!-- <daily-article></daily-article> -->
   </div>
 </template>
 
@@ -54,20 +55,12 @@ export default {
   methods: {
     formatDay (date) {
       // 转换为带汉字的月日
-      // let month = date.substr(4, 2)
-      // let day = date.substr(6, 2)
-      // if (month.substr(0, 1) === '0') month = month.substr(1, 1)
-      // if (day.substr(0, 1) === '0') day = day.substr(1, 1)
-      // return `${month} 月 ${day} 日`
-      console.log(date)
+      let month = date.substr(4, 2)
+      let day = date.substr(6, 2)
+      if (month.substr(0, 1) === '0') month = month.substr(1, 1)
+      if (day.substr(0, 1) === '0') day = day.substr(1, 1)
+      return `${month} 月 ${day} 日`
     },
-    // formatDay (date) {
-    //   let month = date.substr(4, 2)
-    //   let day = date.substr(6, 2)
-    //   if (month.substr(0, 1) === '0') month = month.substr(1, 1)
-    //   if (day.substr(0, 1) === '0') day = day.substr(1, 1)
-    //   return `${month} 月 ${day} 日`
-    // },
     getThemes () {
       // axios发起get请求
       $.ajax.get('themes').then(res => {
