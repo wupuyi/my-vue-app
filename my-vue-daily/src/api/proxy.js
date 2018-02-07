@@ -31,7 +31,7 @@ apiServer.listen(port, hostname, () => {
 
 // 创建一个图片代理服务
 const imgServer = http.createServer((req, res) => {
-  const url = req.url.splist('/img/')[1]
+  const url = req.url.split('/img/')[1]
   const options = {
     url,
     encoding: null
@@ -39,7 +39,7 @@ const imgServer = http.createServer((req, res) => {
 
   function callback (error, response, body) {
     if (!error && response.statusCode === 200) {
-      const contentType = response.header['content-type']
+      const contentType = response.headers['content-type']
       res.setHeader('Content-Type', contentType)
       res.setHeader('Access-Control-Allow-Origin', '*')
       res.end(body)
