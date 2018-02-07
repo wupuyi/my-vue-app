@@ -32,6 +32,7 @@ export default {
     overflow: hidden;
     cursor: pointer;
     transition: all .3s ease-in-out;
+    border-bottom: 1px solid #eeeeee;
 }
 .daily-item:hover{
     background: #e3e8ee;

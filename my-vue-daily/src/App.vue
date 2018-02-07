@@ -14,29 +14,32 @@
         </li>
       </ul>
     </div>
-    <div class="daily-list">
+    <div class="daily-list" ref="list">
       <template v-if="type === 'recommend'">
         <div v-for="list in recommendList">
           <div class="daily-date">{{ formatDay(list.date) }}</div>
           <item v-for="item in list.stories"
                 :data="item"
-                :key="item.id"></item>
+                :key="item.id"
+                @click.native="handleClick(item.id)"></item>
         </div>
       </template>
       <template v-if="type === 'daily'">
         <item v-for="item in list"
               :data="item"
-              :key="item.id">
+              :key="item.id"
+              @click.native="handleClick(item.id)">
         </item>
       </template>
     </div>
-    <!-- <daily-article></daily-article> -->
+    <daily-article :id="articleId"></daily-article>
   </div>
 </template>
 
 <script>
 import $ from './libs/util'
 import Item from './components/item'
+import DailyArticle from './components/daily-article'
 export default {
   name: 'Daily',
   data () {
@@ -48,11 +51,16 @@ export default {
       themeId: 0,
       recommendList: [],
       dailyTime: $.getTodayTime(),
-      isLoading: false
+      isLoading: false,
+      articleId: 0
     }
   },
   computed: {},
   methods: {
+    handleClick (id) {
+      console.log(id)
+      this.articleId = id
+    },
     formatDay (date) {
       // 转换为带汉字的月日
       let month = date.substr(4, 2)
@@ -98,10 +106,24 @@ export default {
   mounted () {
     // 初始化时调用
     this.getRecommendList()
+    // 获取DOM
+    const $list = this.$refs.list
+    // 监听列表栏滚动事件
+    $list.addEventListener('scroll', () => {
+      // 在“主题日报”或正在加载推荐列表时停止操作
+      if (this.type === 'daily' || this.isLoading) return
+      // 已经滚动的距离加页面的高度等于整个内容区域高度是，视为接触底部
+      if ($list.scrollTop + document.body.clientHeight >= $list.scrollHeight) {
+        // 时间相对减少一天
+        this.dailyTime -= 86400000
+        this.getRecommendList()
+      }
+    })
     this.getThemes()
   },
   components: {
-    Item
+    Item,
+    DailyArticle
   }
 }
 </script>
@@ -167,29 +189,10 @@ body {
 }
 .daily-date {
   text-align: center;
-  margin: 10px 0;
-}
-
-.daily-article {
-  margin-left: 450px;
-  padding: 20px;
-}
-.daily-article-title {
-  font-size: 28px;
-  font-weight: bold;
-  color: #222;
   padding: 10px 0;
-}
-
-.view-more a {
-  display: block;
-  cursor: pointer;
-  background: #f5f7f9;
-  text-align: center;
-  color: inherit;
-  text-decoration: none;
-  padding: 4px 0;
-  border-radius: 3px;
+  margin: 5px 0;
+  background-color: #3399ff;
+  color: #ffffff;
 }
 
 .daily-comments {
