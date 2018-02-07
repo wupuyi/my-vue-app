@@ -12,7 +12,7 @@ npm install
 
 # 开启代理
 
-src -> api -> proxy.js
+# 文件路径 src -> api -> proxy.js
 
 node proxy.js
 
