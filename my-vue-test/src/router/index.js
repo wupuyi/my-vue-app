@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import ShoppingCart from '@/components/shopping-cart/shopping-cart'
 import InputNumber from '@/components/input-number/input-number'
 import Test from '@/components/test/test'
+import StylusTest from '@/components/stylus-test'
 
 Vue.use(Router)
 
@@ -32,6 +33,11 @@ export default new Router({
       path: '/test',
       name: 'Test',
       component: Test
+    },
+    {
+      path: '/stylus',
+      name: 'StylusTest',
+      component: StylusTest
     },
     {
       path: '*',
