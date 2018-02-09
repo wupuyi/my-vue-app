@@ -9,7 +9,7 @@
           class="header-menu-cart"
         >
           购物车
-          <!-- <span v-if="cartList.length">{{ cartList.length }}</span> -->
+          <span v-if="cartList.length">{{ cartList.length }}</span>
         </router-link>
       </div>
     </div>
@@ -24,6 +24,9 @@ export default {
     cartList () {
       return this.$store.state.cartList
     }
+  },
+  mounted (){
+    console.log(this.$store.state.cartList)
   }
 }
 </script>
