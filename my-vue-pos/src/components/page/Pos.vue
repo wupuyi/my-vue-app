@@ -11,7 +11,7 @@
                 <el-table-column prop="price" label="金额" width="70"></el-table-column>
                 <el-table-column label="操作" width="100" fixed="right">
                   <template slot-scope="scope">
-                    <el-button type="text" size="small">删除</el-button>
+                    <el-button type="text" size="small" @click="delSingleGoods(scope.row)">删除</el-button>
                     <el-button type="text" size="small" @click="addOrderList(scope.row)">增加</el-button>
                   </template>
                 </el-table-column>
@@ -24,8 +24,8 @@
             <small>数量：</small>{{totalCount}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <small>金额：</small>{{totalMoney}}元
           </div>
           <el-button type="warning">挂单</el-button>
-          <el-button type="danger">删除</el-button>
-          <el-button type="success">结账</el-button>
+          <el-button type="danger" @click="delAllGoods">删除</el-button>
+          <el-button type="success" @click="checkout">结账</el-button>
         </el-col>
         <!-- 商品展示 -->
         <el-col :span="17">
@@ -126,11 +126,44 @@ export default {
         let newGoods = {goodsId: goods.goodsId, goodsName: goods.goodsName, price: goods.price, count: 1}
         this.tableData.push(newGoods)
       }
-      // 计算汇总金额和数量
-      this.tableData.forEach((element) => {
-        this.totalCount += element.count
-        this.totalMoney = this.totalMoney + (element.price * element.count)
-      })
+      this.getAllMoney()
+    },
+    // 删除单个商品
+    delSingleGoods (goods) {
+      console.log(goods)
+      this.tableData = this.tableData.filter(o => o.goodsId !== goods.goodsId)
+      this.getAllMoney()
+    },
+    delAllGoods () {
+      this.tableData = []
+      this.totalMoney = 0
+      this.totalCount = 0
+    },
+    // 汇总数量和金额
+    getAllMoney () {
+      this.totalCount = 0
+      this.totalMoney = 0
+      if (this.tableData) {
+        // 计算汇总金额和数量
+        this.tableData.forEach((element) => {
+          this.totalCount += element.count
+          this.totalMoney = this.totalMoney + (element.price * element.count)
+        })
+      }
+    },
+    // 模拟结账
+    checkout () {
+      if (this.totalCount !== 0) {
+        this.tableData = []
+        this.totalMoney = 0
+        this.totalCount = 0
+        this.$message({
+          message: '结账成功，感谢您又为店里出了一份力！',
+          type: 'success'
+        })
+      } else {
+        this.$message.error('不能空结，老板了解您急切的心情！')
+      }
     }
   },
   mounted () {
