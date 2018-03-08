@@ -1,5 +1,7 @@
 # my-vue-pos
 
+## vue写的仿柜台收银系统
+
 > A Vue.js project
 
 ## Build Setup

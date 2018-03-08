@@ -1,8 +1,6 @@
-# my-webapp
+# my-vue-webapp
 
-## 我的个人作品集，填坑中。
-
-> My personal webapp
+> A Vue.js project
 
 ## Build Setup
 
