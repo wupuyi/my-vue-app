@@ -1,8 +1,8 @@
 {
   "name": "my-vue-todolist",
   "version": "1.0.0",
-  "description": "my vue todolist",
-  "author": "Puyi",
+  "description": "A Vue.js project",
+  "author": "wupuyi <wupuyi@foxmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -11,8 +11,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "normalize.css": "^7.0.0",
-    "vue": "^2.5.2"
+    "vue": "^2.5.2",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
