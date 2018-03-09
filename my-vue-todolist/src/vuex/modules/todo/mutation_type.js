@@ -1,8 +1,6 @@
-/*
- * @Author: Puyi Wu
- * @Date: 2018-03-08 15:46:03
- * @Last Modified by: Puyi Wu
- * @Last Modified time: 2018-03-08 15:47:18
- */
-
+// 新增
 export const ADD_TODO = 'ADD_TODO'
+// 完成
+export const DONE_TODO = 'DONE_TODO'
+
+export const SELECT_TYPE = 'SELECT_TYPE'

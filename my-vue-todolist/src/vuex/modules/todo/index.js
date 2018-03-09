@@ -1,15 +1,22 @@
-/*
- * @Author: Puyi Wu
- * @Date: 2018-03-08 15:11:10
- * @Last Modified by: Puyi Wu
- * @Last Modified time: 2018-03-08 15:49:49
- */
-
-// import actions from './actions'
-import mutations from './mutations'
 export default {
   state: {
-    todoList: []
+    todoList: [],
+    todoInfo: {
+      id: 0,
+      text: '',
+      isDone: false
+    },
+    selected: 0
   },
-  mutations
+  getters: {
+    // 已完成的todo
+    filterDoned (state) {
+      let todoList = state.todoList.filter((item) => {
+        if (item.isDone) {
+          return item
+        }
+      })
+      return todoList
+    }
+  }
 }
