@@ -1,6 +1,6 @@
 # my-vue-mall
 
-> my vue mall, this is test vue project
+> vue.js实战部分的项目,待填坑
 
 ## Build Setup
 

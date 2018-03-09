@@ -1,6 +1,6 @@
 # my-vue-todolist
 
-> A Vue.js project
+> vue todolist, 主要为了熟悉vuex.功能偏简单,后期再填坑
 
 ## Build Setup
 

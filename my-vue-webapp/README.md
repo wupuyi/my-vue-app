@@ -1,6 +1,6 @@
 # my-vue-webapp
 
-> A Vue.js project
+> 商场练习,熟悉vuex
 
 ## Build Setup
 
