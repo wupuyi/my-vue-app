@@ -1,6 +1,6 @@
 # my-vue-webapp
 
-> 商场练习,熟悉vuex
+> 商城练习,熟悉vuex
 
 ## Build Setup
 
