@@ -19,6 +19,7 @@ export default {
       }
       todoInfo.text = todoText
       state.todoList.push(todoInfo)
+      console.log(state.todoList)
     }
   },
   [types.DONE_TODO] (state, id) {

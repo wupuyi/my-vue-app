@@ -10,6 +10,7 @@
       </div>
       <!-- 添加啊 -->
       <add-todo></add-todo>
+      <todo-list></todo-list>
     </div>
 
   </div>

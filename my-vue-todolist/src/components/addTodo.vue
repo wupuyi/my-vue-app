@@ -16,8 +16,10 @@ export default {
   },
   methods: {
     addTodo () {
-      this.$store.commit()
-    },
+      // 提交action，并把输入内容置空
+      this.$store.dispatch('addTodo', this.todoText)
+      this.todoText = ''
+    }
   }
 }
 </script>
