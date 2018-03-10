@@ -66,5 +66,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-
+.van-tabbar-item--active
+  span
+    color: #ff7834;
 </style>
